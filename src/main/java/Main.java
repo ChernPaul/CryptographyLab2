@@ -47,7 +47,7 @@ class Main {
 
         SequencePeriodInfo seqInfo = AlgorithmPeriod.showPeriodInfo(resultBoolArray);
         System.out.println("Result of show period info");
-       // System.out.println(seqInfo.toString());
+        //System.out.println(seqInfo.toString());
 
 
 
@@ -59,11 +59,18 @@ class Main {
 
         boolean[] sequenceBool = StringToBooleanArray.stringToBoolArray("0110110101");
 
-        System.out.println(RandomExcursionTest.run(TransformTypes.arrayToBooleanList(sequenceBool)));
+
         System.out.println("Pi");
         System.out.println(RandomExcursionTest.run(pi)[8]);
         System.out.println("Exp");
         System.out.println(RandomExcursionTest.run(exp)[8]);
+
+        System.out.println("Approximate test");
+        System.out.println("Pi");
+        System.out.println(ApproximateEntropyTest.run(pi));
+        System.out.println("Exp");
+        System.out.println(ApproximateEntropyTest.run(exp));
+
 
         System.out.println("Final test");
         System.out.println("Random Excursion test");

@@ -45,8 +45,14 @@ public  class ApproximateEntropyTest {
         }
 
         for (int i = 0; i < (1 << m); i++) {
+
             Cjm = (double) (pattern[i]) / (double) (n);
-            phim += Cjm * log(Cjm);
+            if (Cjm!=0){
+                phim += Cjm * log(Cjm);
+            }
+            else{
+                phim = 0;
+            }
         }
 
         for (int i = 0; i < m - 1; i++) {
@@ -74,8 +80,13 @@ public  class ApproximateEntropyTest {
         }
 
         for (int i = 0; i < (1 << m); i++) {
+
             Cjm = (double) (pattern[i]) / (double) (n);
-            phim1 += Cjm * log(Cjm);
+            if( Cjm !=0) {
+                phim1 += Cjm * log(Cjm);
+            }
+            else
+                phim1 =0;
         }
 
         for (int i = 0; i < m - 1; i++) {
