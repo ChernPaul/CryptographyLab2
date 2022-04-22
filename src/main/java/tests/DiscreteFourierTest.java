@@ -32,6 +32,7 @@ public class DiscreteFourierTest {
                 r[i] = -1.0;
         }
         r = pow2DoubleArr(r);
+
         FastFourierTransformer fft = new FastFourierTransformer(DftNormalization.STANDARD);
         Complex[] result = fft.transform(r, TransformType.FORWARD);
 
@@ -45,7 +46,7 @@ public class DiscreteFourierTest {
 
         double V = (N_1 - N_0) / sqrt(0.95 * 0.05 * n / 4);     // compute d    // was  under sqrt /2  => /4
         double P = erfc(abs(V) / sqrt(2));                  // compute p value
-
+        System.out.println(" DFT Parameters DATA");
         System.out.println("N_0");
         System.out.println(N_0);
         System.out.println("N_1");
@@ -55,6 +56,7 @@ public class DiscreteFourierTest {
         System.out.println(" ");
         System.out.println(" ");
         System.out.println(" ");
+        System.out.println(" DFT Parameters DATA ended");
         return P;
     }
 

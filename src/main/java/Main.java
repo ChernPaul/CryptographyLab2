@@ -4,6 +4,7 @@ import model.LFSRGenerator;
 import model.SequencePeriodInfo;
 import tests.ApproximateEntropyTest;
 import tests.DiscreteFourierTest;
+import tests.RandomExcursionTest;
 import utils.*;
 
 import java.io.IOException;
@@ -38,30 +39,15 @@ class Main {
         LFSRGenerator generator3 = new LFSRGenerator(stateArrayGen3, coefficientArrayGen3);
 
 
-        boolean[] genSequence1 = generator1.generateSequence(20);
-        boolean[] genSequence2 = generator2.generateSequence(20);
-        boolean[] genSequence3 = generator3.generateSequence(20);
-
-        System.out.println("View sequences");
-        System.out.println(ViewHelper.binViewAsString(genSequence1));
-        System.out.println(ViewHelper.binViewAsString(genSequence2));
-        System.out.println(ViewHelper.binViewAsString(genSequence3));
-
-        boolean [] resultBoolArray = AlgorithmTask.majorityNonLinear(genSequence1, genSequence2, genSequence3);
-        System.out.println("Result of Group generators");
-        System.out.println(ViewHelper.binViewAsString(resultBoolArray));
-
-
         System.out.println("New sequences");
-        genSequence1 = generator1.generateSequence(10000);
-        genSequence2 = generator2.generateSequence(10000);
-        genSequence3 = generator3.generateSequence(10000);
-        boolean [] resultBoolArray1 = AlgorithmTask.majorityNonLinear(genSequence1, genSequence2, genSequence3);
-        // System.out.println("Long Sequences combo");
-        // System.out.println(ViewHelper.binViewAsString(resultBoolArray1));
-        SequencePeriodInfo seqInfo = AlgorithmPeriod.showPeriodInfo(resultBoolArray1);
+        boolean[] genSequence1 = generator1.generateSequence(1000000);
+        boolean[] genSequence2 = generator2.generateSequence(1000000);
+        boolean[] genSequence3 = generator3.generateSequence(1000000);
+        boolean [] resultBoolArray = AlgorithmTask.majorityNonLinear(genSequence1, genSequence2, genSequence3);
+
+        SequencePeriodInfo seqInfo = AlgorithmPeriod.showPeriodInfo(resultBoolArray);
         System.out.println("Result of show period info");
-        System.out.println(seqInfo.toString());
+       // System.out.println(seqInfo.toString());
 
 
 
@@ -71,55 +57,30 @@ class Main {
         List<Boolean> pi = Reader.readFileInBooleanArray(filepath);
 
 
+        boolean[] sequenceBool = StringToBooleanArray.stringToBoolArray("0110110101");
 
-        double FFTTestResult = DiscreteFourierTest.run(utils.TransformTypes.arrayToBooleanList(resultBoolArray));
-        System.out.println("Spectral Test");
-        System.out.println(FFTTestResult);
+        System.out.println(RandomExcursionTest.run(TransformTypes.arrayToBooleanList(sequenceBool)));
+        System.out.println("Pi");
+        System.out.println(RandomExcursionTest.run(pi)[8]);
+        System.out.println("Exp");
+        System.out.println(RandomExcursionTest.run(exp)[8]);
 
-        System.out.println("FFT result");
-        FFTTestResult = DiscreteFourierTest.run(pi);
-        System.out.println(FFTTestResult);
+        System.out.println("Final test");
+        System.out.println("Random Excursion test");
+        ViewHelper.printDoubleArray(RandomExcursionTest.run(TransformTypes.arrayToBooleanList(resultBoolArray)));
 
-        System.out.println("FFT result");
-        FFTTestResult = DiscreteFourierTest.run(exp);
-        System.out.println(FFTTestResult);
+        System.out.println("Approx test");
+        System.out.println(ApproximateEntropyTest.run(TransformTypes.arrayToBooleanList(resultBoolArray)));
 
-
-        double EntropyTestResult = ApproximateEntropyTest.run(pi);
-        System.out.println("Approximate result");
-        System.out.println(EntropyTestResult);
-
-        EntropyTestResult = ApproximateEntropyTest.run(exp);
-        System.out.println("Approximate result");
-        System.out.println(EntropyTestResult);
+        System.out.println("Discrete Fourier test test");
+        System.out.println(DiscreteFourierTest.run(TransformTypes.arrayToBooleanList(resultBoolArray)));
 
 
 
-        UtilWriter.writeBooleanListToFile("D:\\Рабочий стол\\pi.txt",pi);
-        System.out.println(pi.size());
-        System.out.println(exp.size());
 
-        UtilWriter.writeBooleanListToFileAsExample("D:\\Рабочий стол\\pi1.txt",pi);
-        UtilWriter.writeBooleanListToFileAsExample("D:\\Рабочий стол\\exp1.txt",exp);
 
-        String testData = "1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000";
 
-        boolean[] testDataArray = StringToBooleanArray.stringToBoolArray(testData);
-        System.out.println("FFT");
-        FFTTestResult = DiscreteFourierTest.run(TransformTypes.arrayToBooleanList(testDataArray));
-        System.out.println("FFT result test data");
-        System.out.println(FFTTestResult);
-        System.out.println("Test  pi");
-        FFTTestResult = DiscreteFourierTest.run(pi);
-        System.out.println("FFT result pi");
-        System.out.println(FFTTestResult);
 
-        testData = "1001010011";
-        testDataArray = StringToBooleanArray.stringToBoolArray(testData);
-        System.out.println("FFT");
-        FFTTestResult = DiscreteFourierTest.run(TransformTypes.arrayToBooleanList(testDataArray));
-        System.out.println("FFT result test data");
-        System.out.println(FFTTestResult);
     }
 
 

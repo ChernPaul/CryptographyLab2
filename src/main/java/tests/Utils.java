@@ -112,7 +112,7 @@ public class Utils {
             newData = new double[sumNum];
             System.arraycopy(data, 0, newData, 0, dataLength);
             for (int i = dataLength; i < sumNum; i++) {
-                newData[i] = 0d;
+                newData[i] = 0d;  //
             }
         } else {
             newData = data;
